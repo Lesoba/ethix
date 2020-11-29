@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ethix - Do what's right</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+</head>
+
+<body>
+    <!-- Page 1 -->
+    <div data-role="page" id="menuscreen">
+
+        <!--Header Page 1 -->
+        <div data-role="header" data-position="fixed">
+            <a id="menu" href="menu.html" class="ui-btn-left" data-icon="home"></a>
+            <h1 class="pgtitle">Ethics Chat</h1>
+        </div>
+		        <div class="ui-body ui-body-a chat">
+			
+			
+
+     </div>
+				<div class="ui-body ui-body-a greenhead">
+<p><strong>The <span style="color: #FBF900;">(Company Name)</span> management team will share important information and updates on ethics, including changes in policies and related ethics information, on a regular basis.</strong></p>
+</div>
+        <!-- Body Page 1 -->
+        <div data-role="body" id="postlist">
+
+        </div>
+        <div class="ui-body ui-body-b">
+            <form>
+                <input name="commentUserID" type="hidden" id="commentUserID">
+                <input name="commentAuthor" type="hidden" id="commentAuthor">
+                <input name="commentEmail" type="hidden" id="commentEmail">
+                <input name="commentDate" type="hidden" id="commentDate">
+                <input name="commentArticleID" type="hidden" id="commentArticleID">
+
+                <label for="articleComment">Comment (Maximum 256 characters) <span style="float:right" id="rchars">256 remaining</span></label>
+                <textarea name="articleComment" maxlength="256" id="articleComment" data-theme="a"></textarea>
+                <input name="submitComment" type="submit" id="submitComment" value="Submit">
+            </form>
+            <div id="commentins"></div>
+        </div>
+
+        <ul data-role="listview" data-inset="false" data-theme="b" data-divider-theme="b">
+            <li data-role="list-divider">Comments </li>
+        </ul>
+        <div id="mycomment">
+            No comments...
+        </div><br>
+
+        <!--Footer Page 1 -->
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a class="footbut" href="javascript: history.go(-1)" data-icon="back">Back</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="https://ethix.app/wpapp/wp-json/wp/v2/posts/?per_page=1&categories=10&_jsonp=receiveData"></script>
+    <script>
+        $(document).ready(function() {
+
+            $("#submitComment").click(function() {
+                var commentUserID = $("#commentUserID").val().trim();
+                var commentAuthor = $("#commentAuthor").val().trim();
+                var commentEmail = $("#commentEmail").val().trim();
+                var commentDate = $("#commentDate").val().trim();
+                var commentArticleID = $("#commentArticleID").val().trim();
+                var articleComment = $("#articleComment").val().trim();
+                event.preventDefault();
+                $.ajax({
+                    url: 'https://ethix.app/wpapp/insert_comment_chat.php',
+                    type: 'post',
+                    data: {
+                        commentUserID: commentUserID,
+                        commentAuthor: commentAuthor,
+                        commentEmail: commentEmail,
+                        commentDate: commentDate,
+                        commentArticleID: commentArticleID,
+                        articleComment: articleComment
+
+                    },
+                    success: function(response) {
+
+                        if (response == "Success") {
+                            //window.location.href = "menu.html";
+                            $("#commentins").html("Comment added");
+
+
+                        } else {
+
+                            alert("Failed")
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

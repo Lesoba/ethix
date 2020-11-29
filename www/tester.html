@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ethix - Do what's right</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+
+    <div data-role="page" id="menuscreen">
+
+        <div data-role="header" data-position="fixed">
+            <a id="menu" href="menu.html" class="ui-btn-left" data-icon="home"></a>
+            <h1 class="pgtitle">Ethics Tester</h1>
+        </div>
+        <div class="ui-body ui-body-a tester">
+
+        </div>
+
+
+        <div class="ui-body ui-body-a greenhead">
+            <p style="font-size: 15px;"><strong>The fun way to test your ethics knowledge!</strong></p>
+        </div>
+
+
+
+        <div data-role="body" id="postlist">
+
+            <div class="ui-body ui-body-a linklist" style="padding: 0px 15px;">
+
+
+                <p>It's easy. Simply select the answer you think is right and see how you do. Don't worry, if you get it wrong, you can choose to see the correct answer. <br>
+                    <br>
+                    All the answers are contained in the latest articles on this app so check back regularly to see if you can get 100% every time.<br>
+                    <br>
+                    <strong>Good luck!</strong></p>
+				<p>&nbsp;</p>
+            </div>
+
+            
+           
+
+
+            <div class="ui-body ui-body-a linklist" style="padding: 0px 15px;">
+
+             <button id="prev-btn" class="hide-me" onclick="window.location.href = 'knowledge.html'" data-inline="false">START</button>
+		<button id="next-btn" data-inline="false" onclick="window.location.href = 'article.html'" >Review Ethics Articles</button>
+				<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+            </div>
+
+
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li><a class="footbut" onclick="javascript: history.go(-1)" data-icon="back">Back</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+	
+	</div><!-- /page -->
+
+</body>
+
+</html>

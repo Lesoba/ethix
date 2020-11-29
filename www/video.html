@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Ethix - Do what's right</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+
+</head>
+
+<body>
+    <!-- Page 1 -->
+    <div data-role="page" id="menuscreen">
+
+
+        <!--Header Page 1 -->
+        <div data-role="header" data-position="fixed">
+            <a id="menu" href="menu.html" class="ui-btn-left" data-icon="home"></a>
+            <h1 class="pgtitle">Video Diaries</h1>
+        </div>
+        <!-- Body Page 1 -->
+        <div data-role="body" id="postlist">
+
+        </div><br>
+<br>
+
+        <!--Footer Page 1 -->
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a class="footbut" href="javascript: history.go(-1)" data-direction="reverse" data-icon="back">Back</a></li>
+                   <!-- <li><a class="footbut" href="#" data-icon="action">Archives</a></li>-->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- Page 2 -->
+    <div data-role="page" id="blogpost">
+        <!--Header Page 2 -->
+        <div data-role="header" data-position="fixed">
+            <a id="menu1" href="menu.html" class="ui-btn-left" data-icon="home"></a>
+            <h1 class="pgtitle">Video Diaries</h1>
+        </div>
+
+        <!-- Body Page 2 -->
+
+        <div data-role="body" id="mypost">
+            <div class="ui-body ui-body-a">Loading...</div>
+        </div>
+
+        <div class="ui-bar ui-bar-b pgtitle">
+            <h2><img src="images/starsm.png" class="ui-li-icon">Rate this video<small> (1 star poor - 5 star excellent)</small></h2>
+        </div>
+
+        <div class="ui-body ui-body-b">
+            <form>
+                <input name="commentUserID" type="hidden" id="commentUserID">
+                <input name="commentAuthor" type="hidden" id="commentAuthor">
+                <input name="commentEmail" type="hidden" id="commentEmail">
+                <input name="commentDate" type="hidden" id="commentDate">
+                <input name="commentArticleID" type="hidden" id="commentArticleID">
+
+
+
+                <label for="ratequality">Did you find this video engaging?</label>
+                <input type="text" data-type="range" data-track-theme="b" data-theme="b" name="rateEngage" id="rateEngage" min="1" max="5" value="1">
+                <label for="articleComment">Comment (Maximum 256 characters) <span style="float:right" id="rchars">256 remaining</span></label>
+                <textarea name="articleComment" maxlength="256" id="articleComment" data-theme="a"></textarea>
+                <input name="submitComment" type="submit" id="submitComment" value="Submit">
+            </form>
+            <div id="commentins"></div>
+        </div>
+
+
+        <ul data-role="listview" data-inset="false" data-theme="b" data-divider-theme="b">
+            <li data-role="list-divider">Comments </li>
+        </ul>
+        <div id="mycomment">
+            No comments...
+        </div>
+<br>
+<br>
+        <!-- Footer Page 2 -->
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a class="footbut" href="#menuscreen" data-direction="reverse" data-icon="back">Back</a></li>
+                   <!-- <li><a class="footbut" href="#" data-icon="action">Archives</a></li> -->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/video.js"></script>
+    <script src="https://ethix.app/wpapp/wp-json/wp/v2/posts/?per_page=10&categories=13&_jsonp=receiveData"></script>
+    <script>
+        $(document).ready(function() {
+
+            $("#submitComment").click(function() {
+                var commentUserID = $("#commentUserID").val().trim();
+                var commentAuthor = $("#commentAuthor").val().trim();
+                var commentEmail = $("#commentEmail").val().trim();
+                var commentDate = $("#commentDate").val().trim();
+                var commentArticleID = $("#commentArticleID").val().trim();
+                var rateEngage = $("#rateEngage").val().trim();
+                var articleComment = $("#articleComment").val().trim();
+                event.preventDefault();
+                $.ajax({
+                    url: 'https://ethix.app/wpapp/insert_comment_vid.php',
+                    type: 'post',
+                    data: {
+                        commentUserID: commentUserID,
+                        commentAuthor: commentAuthor,
+                        commentEmail: commentEmail,
+                        commentDate: commentDate,
+                        commentArticleID: commentArticleID,
+                        rateEngage: rateEngage,
+                        articleComment: articleComment
+
+                    },
+                    success: function(response) {
+
+                        if (response == "Success") {
+                            //window.location.href = "menu.html";
+                            $("#commentins").html("Comment added");
+							$('#rateEngage').val("1");
+
+                        } else {
+
+                            alert("Failed")
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

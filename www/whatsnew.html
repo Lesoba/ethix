@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ethix - Do what's right</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body>
+
+
+    <div data-role="page" id="menuscreen">
+
+
+
+
+        <div data-role="header" data-position="fixed">
+            <a id="menu" href="menu.html" class="ui-btn-left" data-icon="home"></a>
+            <h1 class="pgtitle">What's new this week</h1>
+        </div>
+		        <div class="ui-body ui-body-a whatsnew">
+			
+			
+
+     </div>
+				<div class="ui-body ui-body-a greenhead">
+<p style="font-size: 15px;"><strong>Each week we load interesting ethics-related articles and a video to keep you in the loop of what is happening in the world of personal and organisational ethics.<br>
+<br>
+We will also load easy-to-listen podcasts from time to time.<br>
+<br> 
+Stay up to date by viewing new, relevant content weekly.
+</strong></p>
+</div>
+		
+		<div data-role="body" id="dateadded" style="text-align: center;">
+           
+        </div>
+        <div data-role="body" id="postlist">
+            Loading...
+        </div>
+        <div class="ui-body ui-body-a" data-role="body"> 
+			<div data-role="body" id="ad1" style="text-align: center;">	</div><br>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a class="footbut" href="menu.html" data-icon="back">Back</a></li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div><!-- /page -->
+	
+	<script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/new.js"></script>
+    <script src="https://ethix.app/wpapp/wp-json/wp/v2/posts/?filter[orderby]=post_date&categories=4&_jsonp=receiveData"></script>
+	<script src="https://ethix.app/wpapp/wp-json/wp/v2/posts/?categories=8&offset=1&_jsonp=getad"></script>
+
+
+	
+</body>
+
+</html>

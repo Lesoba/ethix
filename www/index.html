@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ethix - Do what's right</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body>
+    <div data-role="page" id="loginscreen">
+        <div class="loginlogo">
+            <img class="logo" src="images/ethix_logo.png" alt="Ethix" />
+        </div>
+        <div class="userlogin">
+            <h2>Login</h2>
+            <form method="POST">
+                <input name="username" type="text" id="username" placeholder="Username" />
+                <input name="password" type="password" id="password" placeholder="Password" />
+                <input name="submit_btn" type="submit" id="submit_btn" value="Login">
+            </form>
+            <div id="badcredentials"></div>
+        </div>
+    </div>
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+			localStorage.getItem("userName");
+			localStorage.getItem("userPass");
+			
+            if (localStorage.getItem("userName") !== null || localStorage.getItem("userPass") !== null) {
+                window.location.href = "menu.html";
+            }
+
+            $("#submit_btn").click(function() {
+                var username = $("#username").val().trim();
+                var password = $("#password").val().trim();
+                event.preventDefault();
+                $.ajax({
+                    url: 'https://ethix.app/wpapp/check_user.php',
+                    type: 'post',
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: function(response) {
+
+                        if (response == "Invalid") {
+
+                            localStorage.userName = "";
+                            localStorage.userPass = "";
+                            $("#badcredentials").html("Invalid Credentials");
+
+
+                        } else {
+
+                            var obj = JSON.parse(response);
+                            localStorage.userID = obj[0].ID;
+                            localStorage.userName = obj[0].user_login;
+                            localStorage.userPass = obj[0].user_pass;
+                            localStorage.userUser = obj[0].user_nicename;
+                            localStorage.userEmail = obj[0].user_email;
+                            window.location.href = "menu.html";
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

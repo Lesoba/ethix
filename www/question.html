@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <title>Ethix - Do what's right</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+
+
+
+</head>
+
+ <body> 
+    <!-- Page 1 -->
+    <div data-role="page" id="menuscreen">
+
+
+        <!--Header Page 1 -->
+        <div data-role="header" data-position="fixed">
+            <a id="menu" href="menu.html" class="ui-btn-left" data-icon="home"></a>
+            <h1 class="pgtitle">Ask a Question</h1>
+        </div>
+		
+		 <div class="ui-body ui-body-a question">
+			
+			
+
+     </div>
+						<div class="ui-body ui-body-a greenhead">
+<p style="font-size: 15px;"><strong>Your ethics questions answered.</strong></p>
+</div>
+        <!-- Body Page 1 -->
+        <div data-role="body" id="postlist">
+
+        </div>
+                <div class="ui-body ui-body-b">
+            <form>
+				<input name="commentUserID" type="hidden" id="commentUserID">
+				<input name="commentAuthor" type="hidden" id="commentAuthor">
+				<input name="commentEmail" type="hidden" id="commentEmail">
+				<input name="commentDate" type="hidden" id="commentDate">
+				<input name="commentArticleID" type="hidden" id="commentArticleID">
+				
+                <label for="articleComment">Question (Maximum 512 characters)  <span style="float:right" id="rchars">512 remaining</span></label>
+                <textarea name="articleComment" maxlength="512" id="articleComment" data-theme="a" required></textarea>
+				<select name="commentOfficer" id="commentOfficer">
+				  <option>Select recipient</option>
+				  <option value="BrendanG@difference.co.za">Brendan Grealy - Ethics Officer</option>
+				  <option value="MichelleP@difference.co.za">Michelle Perrow - Director</option>
+				  <option value="tiisetson@difference.co.za">Tiisetso Ngobeni - HR</option>
+				<option value="richardo@difference.co.za">Richard Olivier - Tester</option>
+				</select>
+                <input name="submitComment" type="submit" id="submitComment" value="Submit">
+          </form>
+            <div id="commentins"></div>
+        </div>
+
+<div class="ui-body ui-body-a" data-role="body"> 
+			<div data-role="body" id="ad2" style="text-align: center;">	</div><br>
+
+
+        </div>
+      <!--Footer Page 1 -->
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a class="footbut" href="javascript: history.go(-1)" data-icon="back">Back</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+ 
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+       <script src="js/question.js"></script>
+    <script src="https://ethix.app/wpapp/wp-json/wp/v2/posts/?per_page=1&categories=11&_jsonp=receiveData"></script>
+	 <script src="https://ethix.app/wpapp/wp-json/wp/v2/posts/?per_page=1&categories=8&offset=0&_jsonp=getad"></script>
+ <script>
+        $(document).ready(function() {
+            
+            $("#submitComment").click(function() {
+                var commentUserID = $("#commentUserID").val().trim();
+                var commentAuthor = $("#commentAuthor").val().trim();
+                var commentEmail = $("#commentEmail").val().trim();
+                var commentDate = $("#commentDate").val().trim();
+                var commentArticleID = $("#commentArticleID").val().trim();
+                var articleComment = $("#articleComment").val().trim();
+				var commentOfficer = $("#commentOfficer").val().trim();
+                event.preventDefault();
+                $.ajax({
+                    url: 'https://ethix.app/wpapp/insert_question.php',
+                    type: 'post',
+                    data: {
+                        commentUserID: commentUserID,
+                        commentAuthor: commentAuthor,
+                        commentEmail: commentEmail,
+                        commentDate: commentDate,
+                        commentArticleID: commentArticleID,
+                        articleComment: articleComment,
+						commentOfficer: commentOfficer
+                        
+                    },
+                    success: function(response) {
+
+                        if (response == "Success") {
+                            //window.location.href = "menu.html";
+                           $("#commentins").html("Your question has been sent successfully and will be answered via email.");
+                            
+
+                        } else {
+                            
+                            alert("Failed")
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

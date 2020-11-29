@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Ethix - Do what's right</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+</head>
+
+<body>
+    <!-- Page 1 -->
+    <div data-role="page" id="menuscreen">
+
+
+        <!--Header Page 1 -->
+        <div data-role="header" data-position="fixed">
+            <a id="menu" href="menu.html" class="ui-btn-left" data-icon="home"></a>
+            <h1 class="pgtitle">Ethics Articles</h1>
+        </div>
+        <div class="ui-body ui-body-a arthead">
+			
+			
+     </div>
+		<div class="ui-body ui-body-a greenhead">
+<p style="font-size: 15px;"><strong>The latest relevant articles and thought pieces on the value of building ethical cultures in an organisation.</strong></p>
+</div>
+        <!-- Body Page 1 -->
+        <div data-role="body" id="postlist">
+
+        </div><br>
+
+
+        <!--Footer Page 1 -->
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a class="footbut" href="javascript: history.go(-1)" data-direction="reverse" data-icon="back">Back</a></li>
+                    <!--<li><a class="footbut" href="#" data-icon="action">Archives</a></li>-->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- Page 2 -->
+    <div data-role="page" id="blogpost">
+        <!--Header Page 2 -->
+        <div data-role="header" data-position="fixed">
+            <a id="menu1" href="menu.html" class="ui-btn-left" data-icon="home"></a>
+            <h1 class="pgtitle">Ethics Articles</h1>
+        </div>
+
+        <!-- Body Page 2 -->
+
+        <div data-role="body" id="mypost">
+            <div class="ui-body ui-body-a">Loading...</div>
+			
+        </div>
+
+        <div class="ui-bar ui-bar-b pgtitle">
+            <h2><img src="images/starsm.png" class="ui-li-icon">Rate this article<small> (1 star poor - 5 star excellent)</small></h2>
+        </div>
+
+        <div class="ui-body ui-body-b">
+            <form>
+                <input name="commentUserID" type="hidden" id="commentUserID">
+                <input name="commentAuthor" type="hidden" id="commentAuthor">
+                <input name="commentEmail" type="hidden" id="commentEmail">
+                <input name="commentDate" type="hidden" id="commentDate">
+                <input name="commentArticleID" type="hidden" id="commentArticleID">
+
+
+
+                <label for="rateuseful">Usefulness of article</label>
+                <input type="text" data-type="range" data-track-theme="b" data-theme="b" name="rateUseful" id="rateUseful" min="1" max="5" value="1">
+
+                <label for="ratequality">Quality of article</label>
+                <input type="text" data-type="range" data-track-theme="b" data-theme="b" name="rateQuality" id="rateQuality" min="1" max="5" value="1">
+                <label for="articleComment">Comment (Maximum 256 characters) <span style="float:right" id="rchars">256 remaining</span></label>
+                <textarea name="articleComment" maxlength="256" id="articleComment" data-theme="a" required="required"></textarea>
+                <input name="submitComment" type="submit" id="submitComment" value="Submit">
+            </form>
+            <div id="commentins"></div>
+        </div>
+
+        <ul data-role="listview" data-inset="false" data-theme="b" data-divider-theme="b">
+            <li data-role="list-divider">Comments </li>
+        </ul>
+        <div id="mycomment">
+            No comments...
+        </div>
+
+        <!-- Footer Page 2 --><br>
+        <br>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a class="footbut" href="javascript: history.go(-1)" data-direction="reverse" data-icon="back">Back</a></li>
+                    <!--<li><a class="footbut" href="#" data-icon="action">Archives</a></li>-->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/article.js"></script>
+	
+	
+   <script id="pagin" src="https://ethix.app/wpapp/wp-json/wp/v2/posts/?per_page=8&categories=2&_jsonp=receiveData"></script>
+
+	<script>
+
+var url="https://ethix.app/wpapp/wp-json/wp/v2/posts/?per_page=4&categories=8&offset=";
+  
+var bitmore="&_jsonp=receiveData"
+  document.getElementById('pagin').src = url+num+bitmore;
+</script> 
+	
+    <script>
+        $(document).ready(function() {
+
+            $("#submitComment").click(function() {
+                var commentUserID = $("#commentUserID").val().trim();
+                var commentAuthor = $("#commentAuthor").val().trim();
+                var commentEmail = $("#commentEmail").val().trim();
+                var commentDate = $("#commentDate").val().trim();
+                var commentArticleID = $("#commentArticleID").val().trim();
+                var rateUseful = $("#rateUseful").val().trim();
+                var rateQuality = $("#rateQuality").val().trim();
+                var articleComment = $("#articleComment").val().trim();
+                event.preventDefault();
+                $.ajax({
+                    url: 'https://ethix.app/wpapp/insert_comment.php',
+                    type: 'post',
+                    data: {
+                        commentUserID: commentUserID,
+                        commentAuthor: commentAuthor,
+                        commentEmail: commentEmail,
+                        commentDate: commentDate,
+                        commentArticleID: commentArticleID,
+                        rateUseful: rateUseful,
+                        rateQuality: rateQuality,
+                        articleComment: articleComment
+
+                    },
+                    success: function(response) {
+
+                        if (response == "Success") {
+                            //window.location.href = "menu.html";
+                            $("#commentins").html("Your comment has been added");
+							$('#rateUseful').val("1");
+							$('#rateQuality').val("1");
+
+
+                        } else {
+
+                            alert("Failed")
+                        }
+                    }
+                });
+            });
+        });
+		
+
+    </script>
+</body>
+
+</html>

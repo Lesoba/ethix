@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ethix - Do what's right</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script>
+			
+            if (localStorage.getItem("userName") === null || localStorage.getItem("userPass") === null) {
+                window.location.href = "index.html";
+            }
+			</script>	
+
+</head>
+
+<body>
+
+
+    <div data-role="page" id="menuscreen">
+
+        <div data-role="panel" id="settings" data-display="push" data-position="right">
+            <h1>Settings</h1>
+            <br>
+
+            <button class="ui-btn ui-icon-lock ui-btn-icon-left ui-shadow ui-corner-all">Change Password</button>
+            <button class="ui-btn ui-icon-power ui-btn-icon-left ui-shadow ui-corner-all" id="logout">Log Out</button>
+
+        </div>
+
+        <div data-role="header" data-position="fixed">
+
+            <h1 class="pgtitle">Menu</h1>
+            <a id="setmenu" href="#settings" class="ui-btn-right" data-icon="gear"></a>
+
+        </div>
+
+        <div class="menulogo">
+            <img class="logo" src="images/ethix_logo.png" alt="Ethix" />
+        </div>
+        <div class="menuitems">
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a" onclick="window.location.href = 'whatsnew.html'">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all">
+                        <img class="responsive" src="images/whats_new.png" alt="What's New" />
+                        <div class="menulink">What's<br>
+                            New</div>
+                    </a>
+                </div>
+                <div class="ui-block-b" onclick="window.location.href = 'article.html'">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all">
+                        <img class="responsive" src="images/articles.png" alt="Articles" />
+                        <div class="menulink">Ethics<br>
+                            Articles</div>
+                    </a>
+                </div>
+                <div class="ui-block-c" onclick="window.location.href = 'events.html'">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all">
+                        <img class="responsive" src="images/events.png" alt="Events" />
+                        <div class="menulink">Ethics<br>
+                            Events</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a" onclick="window.location.href = 'video.html'">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all">
+                        <img class="responsive" src="images/diaries.png" alt="Video Diaries" />
+                        <div class="menulink">Video<br>
+                            Diaries</div>
+                    </a>
+                </div>
+
+
+                <div class="ui-block-b" onclick="window.location.href = 'chat.html'">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all">
+                        <img class="responsive" src="images/chat.png" alt="Champion Chat" />
+                        <div class="menulink">Ethics<br>
+                            Chat</div>
+                    </a>
+                </div>
+
+                <div class="ui-block-c" onclick="window.location.href = 'question.html'">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all">
+                        <img class="responsive" src="images/question.png" alt="Ask a question" />
+                        <div class="menulink">Ask a <br>
+                            Question</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ui-grid-b">
+                <div class="ui-block-a" onclick="window.location.href = 'quotes.html'">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all">
+                        <img class="responsive" src="images/quote.png" alt="Quote" />
+                        <div class="menulink">Quote of <br>
+                            the Week</div>
+                    </a>
+                </div>
+
+                <div class="ui-block-b" onclick="window.location.href = 'howto.html'">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all">
+                        <img class="responsive" src="images/whistleblow.png" alt="Whistleblow" />
+                        <div class="menulink">How to <br>
+                            Report</div>
+                    </a>
+                </div>
+
+                <div class="ui-block-b" onclick="window.location.href = 'tester.html'">
+                    <a href="#" class="ui-btn ui-shadow ui-corner-all">
+                        <img class="responsive" src="images/weblinks.png" alt="Ethics Tester" />
+                        <div class="menulink">Ethics<br>
+Tester</div>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+       <div style="text-align: center"> <p><img src="images/4logos.png" width="150" height="44" alt=""/></p><br>
+</div>
+
+        <div data-role="footer" data-position="fixed">&nbsp;</div>
+    </div><!-- /page -->
+
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+
+    <script>
+        $("#logout").click(function() {
+			localStorage.removeItem("userName");
+            localStorage.removeItem("userPass");
+            localStorage.removeItem("userUser");
+            localStorage.removeItem("userID");
+            localStorage.removeItem("userEmail");
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ethix - Do what's right</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+</head>
+
+ <body onload="viewquote()"> 
+    <!-- Page 1 -->
+    <div data-role="page" id="menuscreen">
+
+
+        <!--Header Page 1 -->
+        <div data-role="header" data-position="fixed">
+            <a id="menu" href="menu.html" class="ui-btn-left" data-icon="home"></a>
+            <h1 class="pgtitle">Ethics Quotes</h1>
+        </div>
+        <!-- Body Page 1 -->
+        <div data-role="body" id="postlist">
+
+        </div>
+		
+        <br>
+        <br>
+
+        <!--Footer Page 1 -->
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a class="footbut" href="javascript: history.go(-1)" data-direction="reverse" data-icon="back">Back</a></li>
+                    <!--<li><a class="footbut" href="#" data-icon="action">Archives</a></li>-->
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/quotes.js"></script>
+    <script src="https://ethix.app/wpapp/wp-json/wp/v2/posts/?per_page=5&categories=12&_jsonp=receiveData"></script>
+<script>
+	 function viewquote() {
+	// AddTrack	
+	$.ajax({
+            url: 'https://ethix.app/wpapp/queryquote.php' ,
+            data: {
+                
+            },
+            dataType : 'json'
+        });
+}</script>
+</body>
+
+</html>
